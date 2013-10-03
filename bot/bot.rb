@@ -29,15 +29,15 @@ Net::HTTP.start(config['lastfm']['host']) do |http|
     @artists = doc.elements['lfm/topartists']
 
     @artists.elements.each('artist') do |a|
-      if !(a.elements['name'].text).eql? "Arctic Monkeys"
+      if !(a.elements['name'].text).eql? config['artist']['name']
         next
       end
       # @array_artists << {:mbid => a.elements['mbid'].text, :name => a.elements['name'].text, :listeners => a.elements['listeners'].text}
       p a.elements['name'].text + " :: " + a.elements['listeners'].text
 
-      line = "#{a.elements['mbid'].text}, #{a.elements['name'].text}, #{a.elements['listeners'].text}\n"
+      line = "#{a.elements['mbid'].text},#{a.elements['name'].text},#{a.elements['listeners'].text}\n"
 
-      open("test.txt","a") do |file|
+      open(config['artist']['name'],"a+") do |file|
         file.write(line)
       end
 

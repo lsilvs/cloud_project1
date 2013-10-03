@@ -11,3 +11,6 @@ lastfm:
 period:
     start: 1346457600
     end: 1377993599
+
+artist:
+    name: "Arctic Monkeys"
