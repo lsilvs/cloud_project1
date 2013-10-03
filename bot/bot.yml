@@ -7,3 +7,7 @@ lastfm:
     start: '1377993600'
     end: '1380585599'
     format: 'xml'
+
+period:
+    start: 1346457600
+    end: 1377993599
