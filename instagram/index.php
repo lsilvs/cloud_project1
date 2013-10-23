@@ -1,45 +1,3 @@
-<?php
-	// Supply a user id and an access token
-	$instagram['userid'] = "614631";
-	$instagram['accessToken'] = "614631.ab103e5.86703194cbee4b3cbf7efd02920d8a71";
-	$foursquare['oauth_token'] = "Y20FGZX51DY2LU5NIJE2FLTFS1BASWAVZEF25GQWT1F2MBHN";
-	$foursquare['query'] = "mineirao";
-
-	// Gets our data
-	function fetchData($url) {
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 20);
-		$result = curl_exec($ch);
-		curl_close($ch); 
-		return $result;
-	}
-
-	if($_GET['location']) {
-		$foursquare_v2_id = $_GET['location'];
-		$location_result = fetchData("https://api.instagram.com/v1/locations/search?foursquare_v2_id={$foursquare_v2_id}&access_token={$instagram['accessToken']}");
-		$location_result = json_decode($location_result);
-
-		foreach ($location_result->data as $location) {
-			$locationid = $location->id;	
-		}
-
-		// Pulls and parses data.
-		$result = fetchData("https://api.instagram.com/v1/locations/{$locationid}/media/recent?access_token={$instagram['accessToken']}");
-		$result = json_decode($result);
-	} else {
-		$foursquare_result = fetchData("https://api.foursquare.com/v2/venues/search?intent=global&query={$foursquare['query']}&oauth_token={$foursquare['oauth_token']}&v=20131022");
-		$foursquare_result = json_decode($foursquare_result);
-
-		foreach ($foursquare_result->response->venues as $location) {
-			// $foursquare_v2_id = $location->id;	
-			echo "<a href='/instagram/?location={$location->id}'>{$location->name}</a><br/>";
-		}
-	}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -92,33 +50,13 @@
 		      <input type="text" class="form-control" id="input_venue" name="input_venue" value="" />
 		      <input type="hidden" class="form-control" id="venue_id" name="venue_id" value="" />
 		      <span class="input-group-btn">
-		        <button class="btn btn-default" type="button">Go!</button>
+		        <button class="btn btn-default" type="button" id="venue_search">Go!</button>
 		      </span>
 		    </div><!-- /input-group -->
       </div>
 
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
+      <div class="row marketing" id="pictures">
+        
       </div>
 
       <div class="footer">
@@ -127,25 +65,41 @@
 
     </div> <!-- /container -->
 
-    <?php foreach ($result_asdf->data as $post): ?>
-			<!-- Renders images. @Options (thumbnail,low_resoulution, high_resolution) -->
-			<a class="group" rel="group1" href="<?= $post->images->standard_resolution->url ?>"><img src="<?= $post->images->thumbnail->url ?>"></a>
-		<?php endforeach ?>
-
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript">
     jQuery(document).ready(function($){
+
     	$("#input_venue").autocomplete('venues.php', {
-		        minChars: 3,
-		        onItemSelect: function(evt, ui) {
-		        	// when a venue is selected, populate related fields in this form
-							$("#venue_id").val(evt.data);
-							// this.form.state.value = ui.item.state;
+        minChars: 3,
+        onItemSelect: function(evt, ui) {
+        	// when a venue is selected, populate related fields in this form
+					$("#venue_id").val(evt.data);
+					// this.form.state.value = ui.item.state;
+				}
+		  });
+
+		  $( "#venue_search" ).click(function() {
+		  	$.ajax({
+				  type: "POST",
+				  dataType: 'json',
+				  url: "pictures.php",
+				  data: { foursquare_id: $("#venue_id").val() }
+				})
+				  .done(function( msg ) {
+				  	html = "";
+				  	for (pic in msg.data) {
+				  		html += "<a class='group col-md-3' rel='group1' href='"+msg.data[pic].images.standard_resolution.url+"'><img class='img-thumbnail' src='"+msg.data[pic].images.thumbnail.url+"'></a>"
 						}
-		    });
+						if(html == "") {
+				    	alert("No pictures for selected venue");
+				    } else {
+				    	$( "#pictures" ).html( html );
+				    }
+				  });
+			});
+
 	  });
 		</script>
   </body>
