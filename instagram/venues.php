@@ -1,19 +1,6 @@
 <?php
 
-/*
- * Load sample data
- */
-$data = array(
-    "Great Bittern" => "Botaurus stellaris",
-    "Little Grebe" => "Tachybaptus ruficollis",
-    "Black-necked Grebe" => "Podiceps nigricollis",
-    "Heuglin's Gull" => "Larus heuglini"
-);
-
-    $instagram['userid'] = "614631";
-    $instagram['accessToken'] = "614631.ab103e5.86703194cbee4b3cbf7efd02920d8a71";
-    $foursquare['oauth_token'] = "Y20FGZX51DY2LU5NIJE2FLTFS1BASWAVZEF25GQWT1F2MBHN";
-    $foursquare['query'] = "mineirao";
+  $foursquare['oauth_token'] = "Y20FGZX51DY2LU5NIJE2FLTFS1BASWAVZEF25GQWT1F2MBHN";
 
   // Gets our data
   function fetchData($url) {
@@ -25,8 +12,6 @@ $data = array(
     curl_close($ch); 
     return $result;
   }
-
-  
 
 /*
  * Results array
@@ -76,3 +61,5 @@ if ($output === 'json') {
 } else {
     echo autocomplete_format($results);
 }
+
+?>
