@@ -136,6 +136,17 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    
+    <script type="text/javascript">
+    jQuery(document).ready(function($){
+    	$("#input_venue").autocomplete('venues.php', {
+		        minChars: 3,
+		        onItemSelect: function(evt, ui) {
+		        	// when a venue is selected, populate related fields in this form
+							$("#venue_id").val(evt.data);
+							// this.form.state.value = ui.item.state;
+						}
+		    });
+	  });
+		</script>
   </body>
 </html>
