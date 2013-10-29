@@ -45,7 +45,7 @@
 
       <div class="jumbotron">
         <h1>Choose your venue</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p class="lead">Enter the name of a place and let us look for photos taken on it.</p>
         <div class="input-group input-group-lg">
 		      <input type="text" class="form-control" id="input_venue" name="input_venue" value="" />
 		      <input type="hidden" class="form-control" id="venue_id" name="venue_id" value="" />
