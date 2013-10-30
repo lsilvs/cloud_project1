@@ -59,7 +59,7 @@
       </div>
 
       <div class="row marketing" id="pictures">
-        <a class="group col-md-3" rel="group1" href="http://distilleryimage5.s3.amazonaws.com/0e4b774e40c011e3a11622000ae9129f_8.jpg"><img class="img-thumbnail" src="http://distilleryimage5.s3.amazonaws.com/0e4b774e40c011e3a11622000ae9129f_5.jpg"></a>
+        
       </div>
 
       <div class="footer">
