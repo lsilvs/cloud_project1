@@ -15,6 +15,7 @@
 
     <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" href="assets/css/jumbotron-narrow.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.fancybox-1.3.4.css">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -25,9 +26,11 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-    
+        
     <script type="text/javascript" src="assets/js/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+  
+    
 
   </head>
 
@@ -56,7 +59,7 @@
       </div>
 
       <div class="row marketing" id="pictures">
-        
+        <a class="group col-md-3" rel="group1" href="http://distilleryimage5.s3.amazonaws.com/0e4b774e40c011e3a11622000ae9129f_8.jpg"><img class="img-thumbnail" src="http://distilleryimage5.s3.amazonaws.com/0e4b774e40c011e3a11622000ae9129f_5.jpg"></a>
       </div>
 
       <div class="footer">
@@ -98,9 +101,17 @@
 				    	$( "#pictures" ).html( html );
 				    }
 				  });
-			});
+  			});
+  	  });
 
-	  });
+      $(function() {
+        $('a.group').live('mouseover', function(){ $(this).fancybox() });
+      });
+
 		</script>
+
+    <script type='text/javascript' src='assets/js/jquery.min.js'></script>
+    <script type='text/javascript' src='assets/js/jquery.fancybox-1.3.4.pack.js'></script>
+
   </body>
 </html>
