@@ -79,11 +79,12 @@
         onItemSelect: function(evt, ui) {
         	// when a venue is selected, populate related fields in this form
 					$("#venue_id").val(evt.data);
-					// this.form.state.value = ui.item.state;
+          $( "#venue_search" ).click();
 				}
 		  });
 
 		  $( "#venue_search" ).click(function() {
+        $( "#venue_search" ).addClass("acLoading");
 		  	$.ajax({
 				  type: "POST",
 				  dataType: 'json',
@@ -100,6 +101,7 @@
 				    } else {
 				    	$( "#pictures" ).html( html );
 				    }
+            $( "#venue_search" ).removeClass("acLoading");
 				  });
   			});
   	  });

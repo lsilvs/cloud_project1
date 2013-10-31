@@ -29,7 +29,9 @@
 }
 
 .acLoading {
-	background : url('indicator.gif') right center no-repeat;
+	background : url('loading.gif') right center no-repeat;
+	background-size: 60px 60px;
+	color: transparent;
 }
 
 .acSelect {
