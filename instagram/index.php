@@ -23,12 +23,7 @@
       <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-        
-    <script type="text/javascript" src="assets/js/jquery.autocomplete.js"></script>
-    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+    
   
     
 
@@ -71,47 +66,9 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript">
-    jQuery(document).ready(function($){
-
-    	$("#input_venue").autocomplete('venues.php', {
-        minChars: 3,
-        onItemSelect: function(evt, ui) {
-        	// when a venue is selected, populate related fields in this form
-					$("#venue_id").val(evt.data);
-          $( "#venue_search" ).click();
-				}
-		  });
-
-		  $( "#venue_search" ).click(function() {
-        $( "#venue_search" ).addClass("acLoading");
-		  	$.ajax({
-				  type: "POST",
-				  dataType: 'json',
-				  url: "pictures.php",
-				  data: { foursquare_id: $("#venue_id").val() }
-				})
-				  .done(function( msg ) {
-				  	html = "";
-				  	for (pic in msg.data) {
-				  		html += "<a class='group col-md-3' rel='group1' href='"+msg.data[pic].images.standard_resolution.url+"'><img class='img-thumbnail' src='"+msg.data[pic].images.thumbnail.url+"'></a>"
-						}
-						if(html == "") {
-				    	alert("No pictures for selected venue");
-				    } else {
-				    	$( "#pictures" ).html( html );
-				    }
-            $( "#venue_search" ).removeClass("acLoading");
-				  });
-  			});
-  	  });
-
-      $(function() {
-        $('a.group').live('mouseover', function(){ $(this).fancybox() });
-      });
-
-		</script>
-
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="assets/js/picloc.js"></script>
     <script type='text/javascript' src='assets/js/jquery.min.js'></script>
     <script type='text/javascript' src='assets/js/jquery.fancybox-1.3.4.pack.js'></script>
 
