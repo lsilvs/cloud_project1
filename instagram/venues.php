@@ -33,7 +33,7 @@ function autocomplete_format($results) {
 if (isset($_GET['q'])) {
     $q = strtolower($_GET['q']);
     $q = str_replace(' ', '+', $q);
-    $foursquare_result = fetchData("https://api.foursquare.com/v2/venues/search?intent=global&query={$q}&oauth_token={$foursquare['oauth_token']}&v=20131022");
+    $foursquare_result = fetchData("https://api.foursquare.com/v2/venues/search?ll=53.34,-6.25&query={$q}&oauth_token={$foursquare['oauth_token']}&v=20131022");
     $foursquare_result = json_decode($foursquare_result);
     
     if ($q) {
